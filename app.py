@@ -20,7 +20,7 @@ def form_example():
 		return "<p>The language is {}, and the framework is {}.</P>".format(language03, framework03)
 
 	return """<form method="POST"> 
-	<p>Please input Language <input type="text" name="language02"></p>
+	<p>Please input Language <input type="text" name="language99"></p>
 	<p>Please input Framework <input type="text" name="framework02"></p>
 	<p><input type="submit"></p>
 	</form>"""
@@ -28,10 +28,8 @@ def form_example():
 if __name__ == "__main__":
 	app.run(debug = True, port = 3000)
 
-# 現在要讓表格的輸入和 return 後的頁面做互動
-# 順便看看有 .get() 和直接用 [] 的差異
-# 為區別每個 language 和 framework 所以便在後面添加 01, 02, 03
-# 完成後的表格若不填寫點提交後會顯示以下
-# The language is , and the framework is .
-# 填寫 Python 和 Flask 後提交會顯示如下
-# The language is Python, and the framework is Flask.
+# 現在來測試 .get() 和直接用 [] 的差異
+# 首先把 language02 改為 language99
+# 會發現，由於 表格輸入的資料 = language99 但是 request.form 想要 get 的資料是 language02
+# 所以 request.form.get("language02") 一直無法取得資料
+# 點下提交後永遠都會顯示 The language is None 無論是否有無在第一個表格放入資料
